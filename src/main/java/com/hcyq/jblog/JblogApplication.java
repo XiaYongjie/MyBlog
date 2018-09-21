@@ -5,11 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
+@EnableTransactionManagement
 public class JblogApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
@@ -19,7 +21,6 @@ public class JblogApplication extends SpringBootServletInitializer {
     /**
      * 跨域过滤器
      *
-     * @return
      */
     @Bean
     public CorsFilter corsFilter() {

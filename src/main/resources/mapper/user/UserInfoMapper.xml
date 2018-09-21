@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcyq.jblog.user.dao.UserInfoMapper">
+    <resultMap id="userMap" type="com.hcyq.jblog.user.bean.UserInfo">
+        <id column="u_id" property="uid"/>
+        <id column="user_name" property="userName"/>
+        <id column="password" property="password"/>
+        <id column="email" property="email"/>
+        <id column="head_url" property="headUrl"/>
+        <id column="is_delete" property="isDelete"/>
+        <id column="token" property="token"/>
+    </resultMap>
+    <select id="getUserById" resultType="com.hcyq.jblog.user.bean.UserInfo">
+        SELECT
+            u_id,
+            user_name,
+            password,
+            email,
+            head_url,
+            token
+        FROM blog_user
+        where u_id = #{id} and is_delete = '0'
+        LIMIT 1
+    </select>
+    <select id="getUserByEmail" parameterType="string" resultType="com.hcyq.jblog.user.bean.UserInfo">
+        SELECT
+            u_id,
+            user_name,
+            password,
+            email,
+            head_url,
+            token
+        FROM blog_user
+        where email = #{email} and is_delete = '0'
+        LIMIT 1
+    </select>
+    <select id="getUserByUserName" parameterType="string" resultType="com.hcyq.jblog.user.bean.UserInfo">
+        SELECT
+            u_id,
+            user_name,
+            password,
+            email,
+            head_url,
+            token
+        FROM blog_user
+        where user_name = #{name} and is_delete = '0'
+        LIMIT 1
+    </select>
+    <insert id="addUser">
+        INSERT INTO blog_user (user_name, password, email, token)
+        values (#{userName}, #{password}, #{email}, #{token})
+    </insert>
+</mapper>
